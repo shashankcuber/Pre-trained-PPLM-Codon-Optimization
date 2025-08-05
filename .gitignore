@@ -1,0 +1,22 @@
+# all pt
+*.pt
+*.ps
+
+# Files to ignore
+wandb/
+Data_scripts/
+best_model-ch/
+best_model-ecoli/
+best_model-hg19/
+
+saved_best_mmodel/
+
+*.st
+Raw_Data_hg_ecoli_ch/
+*.csv
+*.pdf
+.DS_Store
+__pycache__/
+
+utils/RNAdegformer
+utils/filtering_tests_util.py
