@@ -1,7 +1,7 @@
 
 # Pre-trained Protein Language Model for Codon Optimization (PPLM-CO)
 
-This is the offical repository for the paper [Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
+This is the offical repository for the paper: [Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
 
 PPLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (ORF) sequences for input protein sequences for host organisms: Human, E.coli and Chinese Hamster Ovary (cho) cells.
 
