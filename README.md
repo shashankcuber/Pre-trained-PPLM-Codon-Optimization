@@ -19,11 +19,11 @@ pip3 install -r requirements.txt
 ```
 3. Download Models 
 Adasel-ProtBert models are available for Human, E.coli and Chinese Hamster species.
-Pre-trained models can be downloaded from [Google Drive]().
-Save them under the folder saved_best_model
+Pre-trained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
+Save them under the folder saved_best_model.
 
 4. Test sets and Reference Set for CAI for each species.
-Download them from [Google Drive]().
+Download them from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
 
 VZV and SARS-CoV2 Benchmark sequences are already in place in the data_preprocessing_protbert.py file.
 
@@ -36,6 +36,30 @@ Server will start and in the terminal you can access the url (local or public) f
 A sample interface of the tool:
 ![](./assets/Inteface-PPLM-CO-Tool.png)
 
+## Description for end user inputs
+1.
+
+|  Model Type  | Training on Species |    Dataset Filtering   |
+|:------------:|:-------------------:|:----------------------:|
+|  human-long  |        Human        | MFE and Protein Length |
+|  human-short |        Human        | MFE and Protein Length |
+| human-random |        Human        |           N/A          |
+|     ecoli    |        E.coli       |     Protein Length     |
+|      cho     |    Chinse-Hamster   |     Protein Length     |
+
+
+2. **Custom Protein Sequence, Species Specific Test Dataset or Vaccine**:
+For evaluation pre-trained models on specific species test sets, choose among human, ecoli and cho.
+
+For evaluating on vaccines-choose sars_cov2 (Covid-19 vaccine Spike Protein ORF) or vzv (shingles vaccine ORF).
+
+The Wild-Type CAI, MFE and GC for the case of sars_cov2 refers to the MODERNA (mRNA1273) benchmark ORF.
+
+****Note:**** ***Custom protein sequence feature will be updated soon. As of now only species specific test sets are provided for testing.***
+
+3. **Host Organism**: 
+Choose among human, ecoli or cho to evaluate the optimized ORF CAI index on. 
+
 ## Citation
 ```
 @article{pathak2024pre,
@@ -47,6 +71,3 @@ A sample interface of the tool:
   publisher={Cold Spring Harbor Laboratory}
 }
 ```
-
-
-
