@@ -2,7 +2,7 @@ import gradio as gr
 from test_protbert import run_inference
 
 with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
-    gr.Markdown("# 🧬 Codon Optimization Tool")
+    gr.Markdown("# 🧬 PPLM-CO Codon Optimization Tool")
     gr.Markdown("This tool uses a fine-tuned ProtBERT model to optimize codon sequences for expression in a host organism.")
     with gr.Row():
         with gr.Column():
