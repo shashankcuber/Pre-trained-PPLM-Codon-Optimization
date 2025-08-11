@@ -34,7 +34,7 @@ python3 gradio_app.py
 Server will start and in the terminal you can access the url (local or public) for opening it. 
 
 A sample interface of the tool:
-![](./assets/Inteface-PPLM-CO Tool.png)
+![](./assets/Inteface-PPLM-CO-Tool.png)
 
 ## Citation
 ```
