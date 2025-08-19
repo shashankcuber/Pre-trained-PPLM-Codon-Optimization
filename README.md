@@ -4,6 +4,7 @@
 This is the offical repository for the paper: [Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
 
 PPLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (ORF) sequences for input protein sequences for host organisms: Human, E.coli and Chinese Hamster Ovary (cho) cells.
+**Update:** Custom Protein Sequence can now be used within the gradio app.
 
 ## Dependencies and Installation
 1. Clone Repo
@@ -49,16 +50,14 @@ A sample interface of the tool:
 
 
 2. **Custom Protein Sequence, Species Specific Test Dataset or Vaccine**:
-For evaluation pre-trained models on specific species test sets, choose among human, ecoli and cho.
+- Choose **human**, **ecoli**, or **cho** for species-specific test sets.  
+- Choose **sars_cov2** (COVID-19 Spike Protein ORF) or **vzv** (Shingles vaccine ORF) for vaccine benchmarks.  
+- For **custom sequences**, select `custom` from the dropdown and paste your protein sequence.  
 
-For evaluating on vaccines-choose sars_cov2 (Covid-19 vaccine Spike Protein ORF) or vzv (shingles vaccine ORF).
+> For **SARS-CoV-2**, the Wild-Type CAI, MFE, and GC values refer to the **Moderna (mRNA-1273) benchmark ORF**.
 
-The Wild-Type CAI, MFE and GC for the case of sars_cov2 refers to the MODERNA (mRNA1273) benchmark ORF.
-
-****Note:**** ***Custom protein sequence feature will be updated soon. As of now only species specific test sets are provided for testing.***
-
-3. **Host Organism**: 
-Choose among human, ecoli or cho to evaluate the optimized ORF CAI index on. 
+3. #### Host Organism
+Select **human**, **ecoli**, or **cho** to evaluate the optimized ORF CAI index.
 
 ## Citation
 ```

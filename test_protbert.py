@@ -122,9 +122,11 @@ def test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_se
         avg_cai = total_cai / len(test_loader.dataset)
         avg_stb = total_stb / len(test_loader.dataset)
         avg_gc = total_gc / len(test_loader.dataset)
+        avg_gc *= 100  # Convert to percentage
         avg_cai_original = total_cai_original / len(test_loader.dataset)
         avg_stb_original = total_stb_original / len(test_loader.dataset)
         avg_gc_original = total_gc_original / len(test_loader.dataset)
+        avg_gc_original *= 100  # Convert to percentage
        
         # print(f'Test CAI = {avg_cai:.4f} | Test CAI Original = {avg_cai_original:.4f} | Test Stability Original = {avg_stb_original:.4f} | Test Stability = {avg_stb:.4f} | Test GC = {avg_gc:.4f} | Test GC Original = {avg_gc_original:.4f} | Test Accuracy = {test_accuracy:.4f} | Test Loss = {avg_test_loss:.4f}')
         print(f'Test CAI = {avg_cai:.4f} | Test CAI Original = {avg_cai_original:.4f} | Test Stability Original = {avg_stb_original:.4f} | Test Stability = {avg_stb:.4f} | Test GC = {avg_gc:.4f} | Test GC Original = {avg_gc_original:.4f}')
@@ -160,7 +162,6 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
     
 
     _, _ , test_loader, ref_seq_cds, cds_token_dict, max_seq_len  = start_preprocessing_probert(dataset_path, protein_seq, host_organism)
-    
     if model_type == 'human-random':
         bert_model_path = 'adasel-protbert-hg19-random-mfe-40k.pt'
     elif model_type == 'human-long':
@@ -190,3 +191,17 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
     results = test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_seq_len, tool_pkg, temperature, stability_type)
     print("Test Results: ", results)
     return (results['Optimized ORF']), float(results['CAI Optimized ORF']), float(results['CAI Wild Type']), float(results['Stability of Optimized ORF']), float(results['Stability of Wild Type']), float(results['GC Content of Optimized ORF']), float(results['GC Content of Wild Type'])
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Run inference on the ProtBert model')
+    parser.add_argument('--mask', type=bool, default=True, help='Masking for the model')
+    parser.add_argument('--stability_type', type=str, default='mfe', help='Stability type (deg/mfe)')
+    parser.add_argument('--tool_pkg', type=str, default='vienna', help='Tool package for stability prediction')
+    parser.add_argument('--temperature', type=int, default=37, help='Temperature for stability prediction')
+    parser.add_argument('--host_organism', type=str, default='human', help='Host organism for the model')
+    parser.add_argument('--protein_seq', type=str, default='sars_cov2', help='Protein sequence to test')
+    parser.add_argument('--model_type', type=str, default='human-long', help='Model type to use')
+
+    args = parser.parse_args()
+    
+    run_inference(args.mask, args.stability_type, args.tool_pkg, args.temperature, args.host_organism, args.protein_seq, args.model_type)
