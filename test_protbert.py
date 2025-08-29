@@ -183,7 +183,11 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
     for param in bert_model.parameters():
         param.requires_grad = False
 
-    model = CodonPredictionModel(bert_model)
+    model = CodonPredictionModel(bert_model).to(device)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f'Total parameters of PPLMCO =: {total_params}')
+    train_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    print(f'Trainable parameters of PPLMCO =: {train_params}')
     print(f"Model testing - {bert_model_path} ")
     checkpoint = torch.load('./saved_best_model/'+bert_model_path, map_location=device)
     model = CodonPredictionModel(bert_model).to(device)
