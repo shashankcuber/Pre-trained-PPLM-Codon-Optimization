@@ -23,10 +23,17 @@ Adasel-ProtBert models are available for Human, E.coli and Chinese Hamster speci
 Pre-trained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
 Save them under the folder saved_best_model.
 
-4. Test sets and Reference Set for CAI for each species.
-Download them from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
+4. **Test Sets and Reference CAI Sets**
 
-VZV and SARS-CoV2 Benchmark sequences are already in place in the data_preprocessing_protbert.py file.
+   Download them from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
+
+   - Unzip the archive `Raw_Data_hg_ecoli_ch.zip`.
+   - Download the following reference files:
+     - `ch-mfe-2500.csv`
+     - `ecoli-mfe-2500.csv`
+     - `hg19_mfe_good_seq.csv`
+
+   > **Note:** VZV and SARS-CoV-2 benchmark sequences are already included in `data_preprocessing_protbert.py`.
 
 ## Quick Inference 
 ```

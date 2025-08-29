@@ -1,7 +1,8 @@
 import random
 from CAI import CAI, relative_adaptiveness, RSCU
-from utils.RNAdegformer.stability_prediction_util import *
+# from utils.RNAdegformer.stability_prediction_util import *
 import torch
+import RNA
 
 def remove_pad_from_output(output_seq_logits, cds_data):
     pred_logits_without_pad = []
@@ -114,12 +115,16 @@ def get_batch_stability(output_seq_logits, cds_data_sorted, cds_token_dict, seq_
         # trimmed_target_seq = cds_data_sorted[i][:seq_lens[i]]
         # target_seq = convert_index_to_codons(trimmed_target_seq, cds_token_dict)
         # print("predicted_seq: ", predicted_seq, '\n', len(predicted_seq))
-        sp = StabilityPredictor(predicted_seq, package, T)
+        # sp = StabilityPredictor(predicted_seq, package, T)
         # sp_pred = StabilityPredictor(target_seq, package, T)
         if stability_type == 'deg':
-            deg = sp.get_stability_from_rnadegformer()[0]
+            '''
+            Not functional currently as RNAdegformer package is not available
+            '''
+            # deg = sp.get_stability_from_rnadegformer()[0]
             # deg_gt = sp_pred.get_stability_from_rnadegformer()[0]
             # print("deg: ", deg, "|", "GT_deg: ", deg_gt)
+            deg = 0
             output_batch_stability.append(deg)
         else:
             if package == "vienna":
