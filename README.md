@@ -39,7 +39,7 @@ Save them under the folder saved_best_model.
 ```
 python3 gradio_app.py
 ```
-Go to => [PPLMCO Interface][http://0.0.0.0:7860]
+Open => [PPLMCO Interface](http://0.0.0.0:7860)
 Server will start and in the terminal you can access the url (local or public) for opening it. 
 
 A sample interface of the tool:
