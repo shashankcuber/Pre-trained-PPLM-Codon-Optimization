@@ -44,7 +44,7 @@ Open => [PPLMCO Interface](http://0.0.0.0:7860)
 Public URL is available in the terminal once the application is executed successfully.
 
 A sample interface of the tool:
-![](./assets/Inteface-PPLM-CO-Tool.png)
+![](./assets/PPLM_CO_Interface.png)
 
 ## Description for end user inputs
 1.
