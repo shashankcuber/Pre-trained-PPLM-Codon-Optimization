@@ -39,6 +39,7 @@ Save them under the folder saved_best_model.
 ```
 python3 gradio_app.py
 ```
+Go to => [PPLMCO Interface][http://0.0.0.0:7860]
 Server will start and in the terminal you can access the url (local or public) for opening it. 
 
 A sample interface of the tool:
@@ -49,9 +50,7 @@ A sample interface of the tool:
 
 |  Model Type  | Training on Species |    Dataset Filtering   |
 |:------------:|:-------------------:|:----------------------:|
-|  human-long  |        Human        | MFE and Protein Length |
-|  human-short |        Human        | MFE and Protein Length |
-| human-random |        Human        |           N/A          |
+|     human    |        Human        | MFE and Protein Length |
 |     ecoli    |        E.coli       |     Protein Length     |
 |      cho     |    Chinse-Hamster   |     Protein Length     |
 

@@ -43,8 +43,8 @@ def infer_wrapper(mask, stability_type, tool_pkg, temperature, host_organism,
         )
 
 with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
-    gr.Markdown("# 🧬 PPLM-CO Codon Optimization Tool")
-    gr.Markdown("This tool uses a fine-tuned ProtBERT model to optimize codon sequences for expression in a host organism.")
+    gr.Markdown("# 🧬 PPLM-CO Tool")
+    # gr.Markdown("This tool uses a fine-tuned ProtBERT model to optimize codon sequences for expression in a host organism.")
 
     with gr.Row():
         with gr.Column():
@@ -55,7 +55,7 @@ with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
             host_organism = gr.Dropdown(['human', 'ecoli', 'cho'], value='human', label="Host Organism")
 
             protein_choice = gr.Dropdown(
-                ['sars_cov2', 'vzv', 'cho', 'ecoli', 'human', 'custom'],
+                ['sars_cov2', 'vzv', 'custom'],
                 label="Protein Sequence / Dataset / Vaccine",
                 value="sars_cov2"
             )
@@ -69,12 +69,16 @@ with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
                 value=""
             )
 
+            # NOTE: your original list had 'human-long' as a value; align with your backend expectations.
             model_type = gr.Dropdown(
-                ['human-random', 'human-long', 'human-short', 'ecoli', 'cho'],
-                value='human-long',
+                ['human', 'ecoli', 'cho'],
+                value='human',
                 label="Model Type"
             )
-            predict_btn = gr.Button("🚀 Predict")
+
+            with gr.Row():
+                predict_btn = gr.Button("🚀 Predict", variant="primary")
+                stop_btn = gr.Button("🛑 Stop", variant="stop")
 
         with gr.Column():
             orf_output = gr.Textbox(label="Optimized ORF", placeholder="Optimized ORF will be displayed here")
@@ -101,12 +105,27 @@ with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
         outputs=[custom_seq, cai_orig_output, stb_orig_output, gc_orig_output]
     )
 
-    predict_btn.click(
+    # Launch prediction and keep the event handle for cancellation
+    predict_event = predict_btn.click(
         fn=infer_wrapper,
         inputs=[mask, stability_type, tool_pkg, temperature, host_organism, protein_choice, model_type, custom_seq],
-        outputs=[orf_output, cai_output, cai_orig_output, stb_output, stb_orig_output, gc_output, gc_orig_output],
-        show_progress=True
+        outputs=[orf_output, cai_output, cai_orig_output, stb_output, stb_orig_output, gc_output, gc_orig_output]
     )
+
+    # Stop button cancels the running (or queued) prediction and clears outputs
+    def _clear_outputs():
+        # Clear values; keep WT visibility consistent with current choice
+        return "", None, None, None, None, None, None
+
+    stop_btn.click(
+        fn=_clear_outputs,
+        inputs=[],
+        outputs=[orf_output, cai_output, cai_orig_output, stb_output, stb_orig_output, gc_output, gc_orig_output],
+        cancels=[predict_event]
+    )
+
+# Enable queueing (required for cancellation to work)
+demo.queue(default_concurrency_limit=1)
 
 if __name__ == "__main__":
     demo.launch(share=True, server_name="0.0.0.0", server_port=7860, debug=True)

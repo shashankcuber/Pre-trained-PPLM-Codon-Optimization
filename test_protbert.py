@@ -162,12 +162,12 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
     
 
     _, _ , test_loader, ref_seq_cds, cds_token_dict, max_seq_len  = start_preprocessing_probert(dataset_path, protein_seq, host_organism)
-    if model_type == 'human-random':
-        bert_model_path = 'adasel-protbert-hg19-random-mfe-40k.pt'
-    elif model_type == 'human-long':
+    # if model_type == 'human-random':
+    #     bert_model_path = 'adasel-protbert-hg19-random-mfe-40k.pt'
+    if model_type == 'human':
         bert_model_path = 'adasel-protbert-hg19-long-mfe.pt'
-    elif model_type == 'human-short':
-        bert_model_path = 'best_model-hg19-bert-mfe-test.pt'
+    # elif model_type == 'human-short':
+    #     bert_model_path = 'best_model-hg19-bert-mfe-test.pt'
     elif model_type == 'ecoli':
         bert_model_path = 'adasel-protbert-ecoli.pt'
     elif model_type == 'cho':
