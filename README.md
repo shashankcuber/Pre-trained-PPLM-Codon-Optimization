@@ -38,7 +38,7 @@ Save them under the folder saved_best_model.
 ```
 python3 gradio_app.py
 ```
-Open => [PPLMCO Interface](http://0.0.0.0:7860)
+Open => [ppLM-CO Interface](http://0.0.0.0:7860)
 
 Public URL is available in the terminal once the application is executed successfully.
 
