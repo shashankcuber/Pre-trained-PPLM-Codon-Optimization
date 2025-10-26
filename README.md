@@ -1,9 +1,9 @@
 
-# Pre-trained Protein Language Model for Codon Optimization (PPLM-CO)
+# Pre-trained Protein Language Model for Codon Optimization (ppLM-CO)
 
-This is the offical repository for the paper: [Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
+This is the offical repository for the paper: [ppLM-CO: Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
 
-PPLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (ORF) sequences for input protein sequences for host organisms: Human, E.coli and Chinese Hamster Ovary (cho) cells.
+ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (ORF) sequences for input protein sequences for host organisms: Human, E.coli and Chinese Hamster Ovary (cho) cells.
 **Update:** Custom Protein Sequence can now be used within the gradio app.
 
 ## Dependencies and Installation
@@ -19,7 +19,6 @@ pip3 install --upgrade pip
 pip3 install -r requirements.txt
 ```
 3. Download Models 
-Adasel-ProtBert models are available for Human, E.coli and Chinese Hamster species.
 Pre-trained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
 Save them under the folder saved_best_model.
 
@@ -44,7 +43,7 @@ Open => [PPLMCO Interface](http://0.0.0.0:7860)
 Public URL is available in the terminal once the application is executed successfully.
 
 A sample interface of the tool:
-![](./assets/PPLM_CO_Interface.png)
+![](./assets/ppLM-CO-interface.png)
 
 ## Description for end user inputs
 1.

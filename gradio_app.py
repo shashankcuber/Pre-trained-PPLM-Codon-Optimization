@@ -42,8 +42,8 @@ def infer_wrapper(mask, stability_type, tool_pkg, temperature, host_organism,
             gr.update(value=float(gc_wt), visible=True),
         )
 
-with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
-    gr.Markdown("# 🧬 PPLM-CO Tool")
+with gr.Blocks(title="Codon Optimization Tool") as demo:
+    gr.Markdown("# 🧬 ppLM-CO Tool")
     # gr.Markdown("This tool uses a fine-tuned ProtBERT model to optimize codon sequences for expression in a host organism.")
 
     with gr.Row():
@@ -52,7 +52,7 @@ with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
             stability_type = gr.Dropdown(['mfe'], value='mfe', label="Stability Type")
             tool_pkg = gr.Dropdown(['vienna'], value='vienna', label="Tool Package")
             temperature = gr.Slider(25, 45, value=37, step=1, label="Temperature (°C)")
-            host_organism = gr.Dropdown(['human', 'ecoli', 'cho'], value='human', label="Host Organism")
+            host_organism = gr.Dropdown(['human', 'ecoli', 'chinese-hamster'], value='human', label="Host Organism")
 
             protein_choice = gr.Dropdown(
                 ['sars_cov2', 'vzv', 'custom'],
@@ -71,7 +71,7 @@ with gr.Blocks(title="Codon Optimization PPLM Tool") as demo:
 
             # NOTE: your original list had 'human-long' as a value; align with your backend expectations.
             model_type = gr.Dropdown(
-                ['human', 'ecoli', 'cho'],
+                ['human', 'ecoli', 'chinese-hamster'],
                 value='human',
                 label="Model Type"
             )

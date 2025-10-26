@@ -128,7 +128,7 @@ def test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_se
         avg_gc_original = total_gc_original / len(test_loader.dataset)
         avg_gc_original *= 100  # Convert to percentage
        
-        # print(f'Test CAI = {avg_cai:.4f} | Test CAI Original = {avg_cai_original:.4f} | Test Stability Original = {avg_stb_original:.4f} | Test Stability = {avg_stb:.4f} | Test GC = {avg_gc:.4f} | Test GC Original = {avg_gc_original:.4f} | Test Accuracy = {test_accuracy:.4f} | Test Loss = {avg_test_loss:.4f}')
+    
         print(f'Test CAI = {avg_cai:.4f} | Test CAI Original = {avg_cai_original:.4f} | Test Stability Original = {avg_stb_original:.4f} | Test Stability = {avg_stb:.4f} | Test GC = {avg_gc:.4f} | Test GC Original = {avg_gc_original:.4f}')
         results =  {
             'Optimized ORF': predicted_orf,
@@ -157,20 +157,17 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
         dataset_path = './Raw_Data_hg_ecoli_ch/hg19.json'
     elif host_organism == 'ecoli':
         dataset_path = './Raw_Data_hg_ecoli_ch/ecoli.json'
-    elif host_organism == 'cho':
+    elif host_organism == 'chinese-hamster':
         dataset_path = './Raw_Data_hg_ecoli_ch/chinese_hamster.json'
     
 
     _, _ , test_loader, ref_seq_cds, cds_token_dict, max_seq_len  = start_preprocessing_probert(dataset_path, protein_seq, host_organism)
-    # if model_type == 'human-random':
-    #     bert_model_path = 'adasel-protbert-hg19-random-mfe-40k.pt'
+   
     if model_type == 'human':
         bert_model_path = 'adasel-protbert-hg19-long-mfe.pt'
-    # elif model_type == 'human-short':
-    #     bert_model_path = 'best_model-hg19-bert-mfe-test.pt'
     elif model_type == 'ecoli':
         bert_model_path = 'adasel-protbert-ecoli.pt'
-    elif model_type == 'cho':
+    elif model_type == 'chinese-hamster':
         bert_model_path = 'adasel-protbert-ch.pt'
 
     model_path = f'./saved_best_model/{bert_model_path}'
@@ -184,10 +181,13 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
         param.requires_grad = False
 
     model = CodonPredictionModel(bert_model).to(device)
+    
     total_params = sum(p.numel() for p in model.parameters())
     print(f'Total parameters of PPLMCO =: {total_params}')
+   
     train_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f'Trainable parameters of PPLMCO =: {train_params}')
+    
     print(f"Model testing - {bert_model_path} ")
     checkpoint = torch.load('./saved_best_model/'+bert_model_path, map_location=device)
     model = CodonPredictionModel(bert_model).to(device)
@@ -207,5 +207,4 @@ if __name__ == "__main__":
     parser.add_argument('--model_type', type=str, default='human-long', help='Model type to use')
 
     args = parser.parse_args()
-    
     run_inference(args.mask, args.stability_type, args.tool_pkg, args.temperature, args.host_organism, args.protein_seq, args.model_type)
