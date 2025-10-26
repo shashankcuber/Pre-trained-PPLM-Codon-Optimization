@@ -3,7 +3,7 @@
 
 This is the offical repository for the paper: [ppLM-CO: Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
 
-ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (ORF) sequences for input protein sequences for host organisms: Human, E.coli and Chinese Hamster Ovary (cho) cells.
+ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (CDS) sequences for input protein sequences for host organisms: Human, E.coli and Chinese-Hamster Ovary cells.
 **Update:** Custom Protein Sequence can now be used within the gradio app.
 
 ## Dependencies and Installation
@@ -48,22 +48,22 @@ A sample interface of the tool:
 ## Description for end user inputs
 1.
 
-|  Model Type  | Training on Species |    Dataset Filtering   |
-|:------------:|:-------------------:|:----------------------:|
-|     human    |        Human        | MFE and Protein Length |
-|     ecoli    |        E.coli       |     Protein Length     |
-|      cho     |    Chinse-Hamster   |     Protein Length     |
+|       Model Type    |  Training on Species 
+|:-------------------:|:-------------------:|
+|     human          |        Human         |
+|     ecoli          |        E.coli        | 
+| chinese-hamster    |    Chinse-Hamster    | 
 
 
 2. **Custom Protein Sequence, Species Specific Test Dataset or Vaccine**:
-- Choose **human**, **ecoli**, or **cho** for species-specific test sets.  
-- Choose **sars_cov2** (COVID-19 Spike Protein ORF) or **vzv** (Shingles vaccine ORF) for vaccine benchmarks.  
+- Choose **human**, **ecoli**, or **chinese-hamster** for species-specific test sets.  
+- Choose **sars_cov2** (COVID-19 Spike Protein CDS) or **vzv** (Shingles vaccine CDS) for vaccine benchmarks.  
 - For **custom sequences**, select `custom` from the dropdown and paste your protein sequence.  
 
-> For **SARS-CoV-2**, the Wild-Type CAI, MFE, and GC values refer to the **Moderna (mRNA-1273) benchmark ORF**.
+> For **SARS-CoV-2**, the Wild-Type CAI, MFE, and GC values refer to the **Moderna (mRNA-1273) benchmark CDS**.
 
 3. #### Host Organism
-Select **human**, **ecoli**, or **cho** to evaluate the optimized ORF CAI index.
+Select **human**, **ecoli**, or **chinese-hamster** to evaluate the optimized CDS CAI index.
 
 ## Citation
 ```
