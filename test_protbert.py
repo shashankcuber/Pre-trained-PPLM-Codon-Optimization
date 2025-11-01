@@ -48,7 +48,7 @@ def get_correct_tags(output_seq_logits, cds_data, seq_lens):
     return right_token, total_tokens
 
 
-def test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_seq_len, tool_pkg, temperature, stability_type):
+def test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_seq_len, tool_pkg, temperature, stability_type, host_organism):
     
         model.eval()
         right_tags_test = 0
@@ -96,7 +96,7 @@ def test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_se
                 cds_pad_trimmed = get_pad_trimmed_cds_data(cds_data_sorted, max_seq_len)
                     
                 if cai_type == 'mse' and (stability_type=='deg' or stability_type=='mfe'):
-                    cai_pred, cai_target, predicted_orf = get_batch_cai(output_seq_logits, cds_data_sorted, cds_token_dict, seq_lens, ref_seq_cds, test=True)
+                    cai_pred, cai_target, predicted_orf = get_batch_cai(output_seq_logits, cds_data_sorted, cds_token_dict, seq_lens, ref_seq_cds, host_organism, test=True)
                     cai_pred_list += list(cai_pred)
                     cai_original_list += list(cai_target)
                    
@@ -156,9 +156,9 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
     if host_organism == 'human':
         dataset_path = './ref_set_sequences/human/hg19.json'
     elif host_organism == 'ecoli':
-        dataset_path = './ref_set_sequence/ecoli/ecoli.json'
+        dataset_path = './ref_set_sequences/ecoli/ecoli.json'
     elif host_organism == 'chinese-hamster':
-        dataset_path = './ref_set_sequence/chinese_hamster/chinese_hamster.json'
+        dataset_path = './ref_set_sequences/chinese_hamster/chinese_hamster.json'
     
 
     _, _ , test_loader, ref_seq_cds, cds_token_dict, max_seq_len  = start_preprocessing_probert(dataset_path, protein_seq, host_organism)
@@ -193,7 +193,7 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
     checkpoint = torch.load(bert_model_path, map_location=device)
     model = CodonPredictionModel(bert_model).to(device)
     model.load_state_dict(checkpoint['model_state_dict'])
-    results = test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_seq_len, tool_pkg, temperature, stability_type)
+    results = test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_seq_len, tool_pkg, temperature, stability_type, host_organism)
     return (results['Optimized ORF']), float(results['CAI Optimized ORF']), float(results['CAI Wild Type']), float(results['Stability of Optimized ORF']), float(results['Stability of Wild Type']), float(results['GC Content of Optimized ORF']), float(results['GC Content of Wild Type'])
 
 if __name__ == "__main__":

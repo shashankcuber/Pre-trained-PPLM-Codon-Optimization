@@ -20,17 +20,14 @@ pip3 install -r requirements.txt
 ```
 3. Download Models 
 Pre-trained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
-Save them under the folder saved_best_model.
+Save the folder **pretrained_models** directly under the repository.
 
 4. **Test Sets and Reference CAI Sets**
 
-   Download them from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
+  An example test set for the Human Dataset is provided in the folder example_data.
+  The reference sequences used for CAI is provided in the ref_set_sequences.
 
-   - Unzip the archive `Raw_Data_hg_ecoli_ch.zip`.
-   - Download the following reference files:
-     - `ch-mfe-2500.csv`
-     - `ecoli-mfe-2500.csv`
-     - `hg19_mfe_good_seq.csv`
+  Training Dataset for all the three sequences can be found [here](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing)
 
    > **Note:** VZV and SARS-CoV-2 benchmark sequences are already included in `data_preprocessing_protbert.py`.
 

@@ -4,6 +4,7 @@ from CAI import CAI, relative_adaptiveness, RSCU
 import torch
 import RNA
 import csv
+from data_preprocessing_protbert import read_data_from_file
 def remove_pad_from_output(output_seq_logits, cds_data):
     pred_logits_without_pad = []
     for id, seq in enumerate(cds_data):
@@ -57,12 +58,18 @@ def get_batch_gc_content(output_seq_logits, cds_data_sorted, cds_token_dict, seq
             target_batch_gc.append(gc_gt)
     return torch.tensor(output_batch_gc), torch.tensor(target_batch_gc)
 
-def get_batch_cai(output_seq_logits, cds_data_sorted, cds_token_dict, seq_lens, ref_seqs, test=False):
+def get_batch_cai(output_seq_logits, cds_data_sorted, cds_token_dict, seq_lens, ref_seqs, host_organism, test=False):
     output_batch_cai = []
     target_batch_cai = []
     predicted_output_logits = torch.argmax(output_seq_logits, dim=-1)
    
-    weights = relative_adaptiveness(ref_seqs)
+    # weights = relative_adaptiveness(ref_seqs)
+    if host_organism == 'human':
+        weights = read_data_from_file('./codon_frequency_table/human_relative_adaptiveness.json')
+    elif host_organism == 'ecoli':
+        weights = read_data_from_file('./codon_frequency_table/ecoli_relative_adaptiveness.json')
+    elif host_organism == 'chinese-hamster':
+        weights = read_data_from_file('./codon_frequency_table/chinese_hamster_relative_adaptiveness.json')
 
     for i in range(len(seq_lens)):
         trimmed_output_seq = predicted_output_logits[i][:seq_lens[i]]
