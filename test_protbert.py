@@ -154,24 +154,24 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
 
 
     if host_organism == 'human':
-        dataset_path = './Raw_Data_hg_ecoli_ch/hg19.json'
+        dataset_path = './ref_set_sequences/human/hg19.json'
     elif host_organism == 'ecoli':
-        dataset_path = './Raw_Data_hg_ecoli_ch/ecoli.json'
+        dataset_path = './ref_set_sequence/ecoli/ecoli.json'
     elif host_organism == 'chinese-hamster':
-        dataset_path = './Raw_Data_hg_ecoli_ch/chinese_hamster.json'
+        dataset_path = './ref_set_sequence/chinese_hamster/chinese_hamster.json'
     
 
     _, _ , test_loader, ref_seq_cds, cds_token_dict, max_seq_len  = start_preprocessing_probert(dataset_path, protein_seq, host_organism)
    
     if model_type == 'human':
-        bert_model_path = 'adasel-protbert-hg19-long-mfe.pt'
+        bert_model_path = './pretrained_models/human/ppLMCO-human.pt'
     elif model_type == 'ecoli':
-        bert_model_path = 'adasel-protbert-ecoli.pt'
+        bert_model_path = './pretrained_models/ecoli/ppLMCO-ecoli.pt'
     elif model_type == 'chinese-hamster':
-        bert_model_path = 'adasel-protbert-ch.pt'
+        bert_model_path = './pretrained_models/chinese_hamster/ppLMCO-ch.pt'
 
-    model_path = f'./saved_best_model/{bert_model_path}'
-    print(f"Model path: {model_path}")
+    # model_path = f'./saved_best_model/{bert_model_path}'
+    # print(f"Model path: {model_path}")
     
     # Loding the ProtBert model as per the model type
     bert_model = BertModel.from_pretrained('Rostlab/prot_bert')
@@ -186,14 +186,14 @@ def run_inference(mask=True, stability_type='mfe', tool_pkg='vienna', temperatur
     print(f'Total parameters of PPLMCO =: {total_params}')
    
     train_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    print(f'Trainable parameters of PPLMCO =: {train_params}')
     
+    print(f'Trainable parameters of PPLMCO =: {train_params}')
     print(f"Model testing - {bert_model_path} ")
-    checkpoint = torch.load('./saved_best_model/'+bert_model_path, map_location=device)
+   
+    checkpoint = torch.load(bert_model_path, map_location=device)
     model = CodonPredictionModel(bert_model).to(device)
     model.load_state_dict(checkpoint['model_state_dict'])
     results = test(model, test_loader, cai_type, mask, cds_token_dict, ref_seq_cds, max_seq_len, tool_pkg, temperature, stability_type)
-    print("Test Results: ", results)
     return (results['Optimized ORF']), float(results['CAI Optimized ORF']), float(results['CAI Wild Type']), float(results['Stability of Optimized ORF']), float(results['Stability of Wild Type']), float(results['GC Content of Optimized ORF']), float(results['GC Content of Wild Type'])
 
 if __name__ == "__main__":

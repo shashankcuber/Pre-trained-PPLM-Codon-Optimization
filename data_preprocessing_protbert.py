@@ -213,15 +213,9 @@ def start_preprocessing_probert(data_file_path, protein_seq ='', host_organism='
     elif protein_seq == 'human':
         max_len = 2499
         print("Human long protein test set")
-        # hg19_df = pd.read_csv('./hg19-long-filtered-mfe.csv')
-        # hg19_df = hg19_df[hg19_df['length']<= max_len]
-        # hg19_df = hg19_df[hg19_df['mfe']<-0.30]
-        # cds_list = list(hg19_df['orf_sequence'])
-        # aa_list = list(hg19_df['aa_sequence'])
-        # cds_list = [x[:-3] for x in cds_list]
         
         # temporarily make the test_aa_human, test_cds_human
-        test_human = pd.read_csv('./test_set_human_long_protbert.csv')
+        test_human = pd.read_csv('./example_data/Human_test.csv')
         test_aa_human = test_human['aa_sequence'].tolist()
         test_cds_human = test_human['cds_sequence'].tolist()
         test_cds_human = [x[:-3] for x in test_cds_human]
@@ -243,10 +237,7 @@ def start_preprocessing_probert(data_file_path, protein_seq ='', host_organism='
 
     
     train_val_aa, test_aa, train_val_cds, test_cds = train_test_split(aa_list, cds_list, test_size=0.2)
-    # save the test aa and test cds sequences to a csv file for future reference
-    # if protein_seq == 'human_long':
-    #     pd.DataFrame({'aa_sequence': test_aa, 'cds_sequence': test_cds}).to_csv(f'./test_set_human_long_protbert.csv', index=False)
-    #     sys.exit()
+
     train_aa, val_aa, train_cds, val_cds = train_test_split(train_val_aa, train_val_cds, test_size=0.2)
 
     train_dataset = AminoAcidCodonDataset(train_aa, train_cds, max_len)
