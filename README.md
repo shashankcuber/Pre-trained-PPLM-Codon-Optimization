@@ -20,14 +20,15 @@ pip3 install -r requirements.txt
 ```
 3. Download Models 
 Pre-trained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
-Save the folder **pretrained_models** directly under the repository.
+Save the folder **\pretrained_models** directly under the repository.
 
 4. **Test Sets and Reference CAI Sets**
 
   An example test set for the Human Dataset is provided in the folder example_data.
-  The reference sequences used for CAI is provided in the ref_set_sequences.
+  
+  Codon Frequency Table for each organism can be found in the folder - **\codon_frequency_table**.
 
-  Training Dataset for all the three sequences can be found [here](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing)
+  Training Dataset for all the three sequences can be found [here](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
 
    > **Note:** VZV and SARS-CoV-2 benchmark sequences are already included in `data_preprocessing_protbert.py`.
 
