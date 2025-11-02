@@ -1,7 +1,7 @@
 
-# ppLM-CO:Pre-trained Protein Language Model for Codon Optimization
+# ppLM-CO: Pre-trained Protein Language Model for Codon Optimization
 
-## Offical repository for the paper: [ppLM-CO: Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
+### Offical repository for the paper: [ppLM-CO: Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
 
 <!-- ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (CDS) sequences for input protein sequences for host organisms: Human, E.coli and Chinese-Hamster Ovary cells. -->
 <!-- **Update:** Custom Protein Sequence can now be used within the gradio app. -->
@@ -57,25 +57,13 @@ pip3 install -r requirements.txt
   ![](./assets/ppLM-CO-interface.png)
 
 #### Description for end user input
-
-
-  |      Model Type    |  Training on Species 
-  |:-------------------:|:-------------------:|
-  |     human          |        Human         |
-  |     ecoli          |        E.coli        | 
-  | chinese-hamster    |    Chinese-Hamster    | 
-
-<br>
-
-**Protein Sequence**:
-- Choose **sars-cov2-spike** (COVID-19 vaccine CDS) or **vzv-gE** (Shingles vaccine CDS) for vaccine benchmarks.  
-- For **custom protein sequences**, select `custom` from the dropdown and paste your protein sequence.  
+* Host Organism: Select either of the host species from the drop down for evaluating CAI of the predicted CDS
+* Model type: Select pre-trained model for a specific species. For eg: **human** for Human species trained ppLM-CO. 
+* Protein Sequence:
+  * Choose **sars-cov2-spike** (COVID-19 vaccine CDS) or **vzv-gE** (Shingles vaccine CDS) for vaccine benchmarks.  
+  * For **custom protein sequences**, select `custom` from the dropdown and paste your protein sequence.  
 
 **Note:** For **SARS-CoV-2**, the Wild-Type CAI, MFE, and GC values refer to the **Moderna (mRNA-1273) benchmark CDS**.
-
-<br>
-
-Select **human**, **ecoli**, or **chinese-hamster** to evaluate CAI for the predicted CDS.
 
 ## Citation
 ```
