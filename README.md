@@ -1,16 +1,17 @@
 
-# Pre-trained Protein Language Model for Codon Optimization (ppLM-CO)
+# ppLM-CO:Pre-trained Protein Language Model for Codon Optimization
 
-This is the offical repository for the paper: [ppLM-CO: Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
+## Offical repository for the paper: [ppLM-CO: Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
 
-ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (CDS) sequences for input protein sequences for host organisms: Human, E.coli and Chinese-Hamster Ovary cells.
-**Update:** Custom Protein Sequence can now be used within the gradio app.
-
+<!-- ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (CDS) sequences for input protein sequences for host organisms: Human, E.coli and Chinese-Hamster Ovary cells. -->
+<!-- **Update:** Custom Protein Sequence can now be used within the gradio app. -->
+![](./assets/ppLM-CO.png)
 ## Dependencies and Installation
 1. Clone Repo
 ```
 git clone https://github.com/shashankcuber/Pre-trained-PPLM-Codon-Optimization.git
 ```
+
 2. Install dependent packages
 ```
 conda create -n PPLMCO python=3.9.6 -y
@@ -18,50 +19,63 @@ conda activate PPLMCO
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 ```
-3. Download Models 
-Pre-trained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
-Save the folder **\pretrained_models** directly under the repository.
 
-4. **Test Sets and Reference CAI Sets**
+## Model Download and Training Dataset
+1. Download Models 
+  - Pre-trained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
 
-  An example test set for the Human Dataset is provided in the folder example_data.
+  - Save the folder **\pretrained_models** directly under the repository.
+
+<br>
+
+2. **Test Sets and Reference CAI Sets**
+
+* Example test set for the Human Dataset is provided in the folder **/example_data**.
   
-  Codon Frequency Table for each organism can be found in the folder - **\codon_frequency_table**.
+* Codon frequency table for each host species can be found in the folder - **/codon_frequency_table**.
 
-  Training Dataset for all the three sequences can be found [here](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
+* Training Dataset for all the three sequences can be found [here](https://drive.google.com/drive/folders/1_KEn-HY4KHhrBTsHuqBV30KEXMON7TLP?usp=sharing).
 
-   > **Note:** VZV and SARS-CoV-2 benchmark sequences are already included in `data_preprocessing_protbert.py`.
+* **Note:** VZV and SARS-CoV-2 benchmark sequences are already included in `data_preprocessing_protbert.py`.
 
 ## Quick Inference 
-```
-python3 gradio_app.py
-```
-Open => [ppLM-CO Interface](http://0.0.0.0:7860)
+* Inference on example Human test set:
+  ```
+  sh prot-bert-test.sh
+  ```
+### Gradio Interface Inference:
 
-Public URL is available in the terminal once the application is executed successfully.
+  ```
+  python3 gradio_app.py
+  ```
 
-A sample interface of the tool:
-![](./assets/ppLM-CO-interface.png)
+  * Open: [ppLM-CO Interface](http://0.0.0.0:7860)
 
-## Description for end user inputs
-1.
+  * Public URL is available in the terminal once the application is executed successfully.
 
-|       Model Type    |  Training on Species 
-|:-------------------:|:-------------------:|
-|     human          |        Human         |
-|     ecoli          |        E.coli        | 
-| chinese-hamster    |    Chinse-Hamster    | 
+  * A sample interface of the tool:
+  ![](./assets/ppLM-CO-interface.png)
+
+#### Description for end user input
 
 
-2. **Custom Protein Sequence, Species Specific Test Dataset or Vaccine**:
-- Choose **human**, **ecoli**, or **chinese-hamster** for species-specific test sets.  
-- Choose **sars_cov2** (COVID-19 Spike Protein CDS) or **vzv** (Shingles vaccine CDS) for vaccine benchmarks.  
-- For **custom sequences**, select `custom` from the dropdown and paste your protein sequence.  
+  |      Model Type    |  Training on Species 
+  |:-------------------:|:-------------------:|
+  |     human          |        Human         |
+  |     ecoli          |        E.coli        | 
+  | chinese-hamster    |    Chinese-Hamster    | 
 
-> For **SARS-CoV-2**, the Wild-Type CAI, MFE, and GC values refer to the **Moderna (mRNA-1273) benchmark CDS**.
+<br>
 
-3. #### Host Organism
-Select **human**, **ecoli**, or **chinese-hamster** to evaluate the optimized CDS CAI index.
+**Protein Sequence**:
+- Choose **sars-cov2-spike** (COVID-19 vaccine CDS) or **vzv-gE** (Shingles vaccine CDS) for vaccine benchmarks.  
+- For **custom protein sequences**, select `custom` from the dropdown and paste your protein sequence.  
+
+**Note:** For **SARS-CoV-2**, the Wild-Type CAI, MFE, and GC values refer to the **Moderna (mRNA-1273) benchmark CDS**.
+
+<br>
+
+Select **human**, **ecoli**, or **chinese-hamster** to evaluate CAI for the predicted CDS.
 
 ## Citation
 ```

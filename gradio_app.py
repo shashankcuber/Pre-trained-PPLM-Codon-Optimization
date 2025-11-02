@@ -55,8 +55,8 @@ with gr.Blocks(title="Codon Optimization Tool") as demo:
             host_organism = gr.Dropdown(['human', 'ecoli', 'chinese-hamster'], value='human', label="Host Organism")
 
             protein_choice = gr.Dropdown(
-                ['sars_cov2', 'vzv', 'custom'],
-                label="Protein Sequence / Dataset / Vaccine",
+                ['sars-cov2-spike', 'vzv-gE', 'custom'],
+                label="Protein Sequence",
                 value="sars_cov2"
             )
 
