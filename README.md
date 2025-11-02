@@ -59,7 +59,7 @@ pip3 install -r requirements.txt
 #### Description for end user input
 * Host Organism: Select either of the host species from the drop down for evaluating CAI of the predicted CDS
 * Model type: Select pre-trained model for a specific species. For eg: **human** for Human species trained ppLM-CO. 
-* Protein Sequence:
+* Input Protein Sequence:
   * Choose **sars-cov2-spike** (COVID-19 vaccine CDS) or **vzv-gE** (Shingles vaccine CDS) for vaccine benchmarks.  
   * For **custom protein sequences**, select `custom` from the dropdown and paste your protein sequence.  
 

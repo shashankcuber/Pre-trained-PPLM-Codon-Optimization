@@ -56,8 +56,9 @@ with gr.Blocks(title="Codon Optimization Tool") as demo:
 
             protein_choice = gr.Dropdown(
                 ['sars-cov2-spike', 'vzv-gE', 'custom'],
-                label="Protein Sequence",
-                value="sars_cov2"
+                label="Input Protein Sequence",
+                value="sars-cov2-spike",
+                info="Select a predefined protein sequence or choose 'custom' to input your own."
             )
 
             # Start hidden; value empty. We’ll populate when “custom” is selected.
