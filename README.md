@@ -5,7 +5,7 @@
 
 <!-- ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (CDS) sequences for input protein sequences for host organisms: Human, E.coli and Chinese-Hamster Ovary cells. -->
 <!-- **Update:** Custom Protein Sequence can now be used within the gradio app. -->
-![](./assets/ppLM-CO.png)
+![](./assets/ppLM-CO_arch.png)
 ## Dependencies and Installation
 1. Clone Repo
 ```
