@@ -19,4 +19,3 @@ Raw_Data_hg_ecoli_ch/
 __pycache__/
 
 utils/RNAdegformer
-utils/filtering_tests_util.py
