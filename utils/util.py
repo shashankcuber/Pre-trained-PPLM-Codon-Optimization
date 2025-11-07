@@ -1,9 +1,7 @@
 import random
-from CAI import CAI, relative_adaptiveness, RSCU
-# from utils.RNAdegformer.stability_prediction_util import *
+from cai2 import CAI
 import torch
 import RNA
-import csv
 from data_preprocessing_protbert import read_data_from_file
 def remove_pad_from_output(output_seq_logits, cds_data):
     pred_logits_without_pad = []
@@ -43,22 +41,21 @@ def get_batch_gc_content(output_seq_logits, cds_data_sorted, cds_token_dict, seq
     predicted_output_logits = torch.argmax(output_seq_logits, dim=-1)
     for i in range(len(seq_lens)):
         trimmed_output_seq = predicted_output_logits[i][:seq_lens[i]]
-        # print("trimmed_output_seq: ", trimmed_output_seq, '\n', len(trimmed_output_seq))
-        predicted_seq = convert_index_to_codons(trimmed_output_seq, cds_token_dict)
-        # print("predicted_seq: ", predicted_seq, '\n', len(predicted_seq))
         
+        predicted_seq = convert_index_to_codons(trimmed_output_seq, cds_token_dict)
+      
         gc = (predicted_seq.count('g') + predicted_seq.count('c')) / len(predicted_seq)
-        # print("GC content: ", gc)
+       
         output_batch_gc.append(gc)
         if test == True:
             trimmed_target_seq = cds_data_sorted[i][:seq_lens[i]]
             target_seq = convert_index_to_codons(trimmed_target_seq, cds_token_dict)
             gc_gt = (target_seq.count('g') + target_seq.count('c')) / len(target_seq)
-            # print("GC content GT: ", gc_gt)
+            
             target_batch_gc.append(gc_gt)
     return torch.tensor(output_batch_gc), torch.tensor(target_batch_gc)
 
-def get_batch_cai(output_seq_logits, cds_data_sorted, cds_token_dict, seq_lens, ref_seqs, host_organism, test=False):
+def get_batch_cai(output_seq_logits, cds_data_sorted, cds_token_dict, seq_lens, host_organism, test=False):
     output_batch_cai = []
     target_batch_cai = []
     predicted_output_logits = torch.argmax(output_seq_logits, dim=-1)
@@ -75,10 +72,6 @@ def get_batch_cai(output_seq_logits, cds_data_sorted, cds_token_dict, seq_lens, 
         trimmed_output_seq = predicted_output_logits[i][:seq_lens[i]]
        
         predicted_seq = convert_index_to_codons(trimmed_output_seq, cds_token_dict)
-        # with open('./protbert_results/hg19/predicted_cds_adasel_hg19_long_mfe.csv', 'a') as f:
-        #     field = ['pplmco_cds']
-        #     writer = csv.DictWriter(f, fieldnames=field)
-        #     writer.writerow({'pplmco_cds':predicted_seq})
         
         output_batch_cai.append(CAI(predicted_seq, weights=weights))
         if test == True:

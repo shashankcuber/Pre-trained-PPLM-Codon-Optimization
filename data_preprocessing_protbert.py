@@ -144,24 +144,8 @@ def get_train_val_test_dataloaders(train_dataset, val_dataset, test_dataset):
     # print("################### DATALOADERS GENERATION DONE ####################### \n")
     return train_loader, val_loader, test_loader
 
-def start_preprocessing_probert(data_file_path, protein_seq ='', host_organism='human'):
+def start_preprocessing_probert(protein_seq ='', host_organism='human'):
   
-    cds_aa_dict = read_data_from_file(data_file_path)
-    # making separate list of 18100 AA and CDS sequences
-    cds_list = list(cds_aa_dict.keys())
-    aa_list = list(cds_aa_dict.values())
-    print(f"Host Organism: {host_organism}")
-    # 5440- ecoli and 30k - ch and 18100- hg19 
-    if host_organism == 'human':
-        ref_cds_list = random.sample(cds_list, 18100)
-    elif host_organism == 'chinese_hamster':
-        ref_cds_list = random.sample(cds_list, 30000)
-    elif host_organism == 'ecoli':
-        ref_cds_list = random.sample(cds_list, 5440)
-    else:
-        ref_cds_list = random.sample(cds_list, 18100)
-
-
     if protein_seq =='sars-cov2-spike':
         # https://www.ncbi.nlm.nih.gov/nuccore/OR134578.1?report=fasta  This is where the sequence is taken from by submitting OR134578.1 in ORF Finder
         amino_seq_moderna = "MFVFLVLLPLVSSQCVNLTTRTQLPPAYTNSFTRGVYYPDKVFRSSVLHSTQDLFLPFFSNVTWFHAISGTNGTKRFDNPVLPFNDGVYFASTEKSNIIRGWIFGTTLDSKTQSLLIVNNATNVVIKVCEFQFCNDPFLGVYYHKNNKSWMESEFRVYSSANNCTFEYVSQPFLMDLEGKQGNFKNLREFVFKNIDGYFKIYSKHTPINLVRDLPQGFSALEPLVDLPIGINITRFQTLLALHRSYLTPGDSSSGWTAGAAAYYVGYLQPRTFLLKYNENGTITDAVDCALDPLSETKCTLKSFTVEKGIYQTSNFRVQPTESIVRFPNITNLCPFDEVFNATRFASVYAWNRKRISNCVADYSVLYNFAPFFAFKCYGVSPTKLNDLCFTNVYADSFVIRGNEVSQIAPGQTGNIADYNYKLPDDFTGCVIAWNSNKLDSKVGGNYNYRYRLFRKSNLKPFERDISTEIYQAGNKPCNGVAGVNCYFPLQSYGFRPTYGVGHQPYRVVVLSFELLHAPATVCGPKKSTNLVKNKCVNFNFNGLTGTGVLTESNKKFLPFQQFGRDIADTTDAVRDPQTLEILDITPCSFGGVSVITPGTNTSNQVAVLYQGVNCTEVPVAIHADQLTPTWRVYSTGSNVFQTRAGCLIGAEHVNNSYECDIPIGAGICASYQTQTKSHRRARSVASQSIIAYTMSLGAENSVAYSNNSIAIPTNFTISVTTEILPVSMTKTSVDCTMYICGDSTECSNLLLQYGSFCTQLNRALTGIAVEQDKNTQQVFAQVKQIYKTPPIKYFGGFNFSQILPDPSKPSKRSFIEDLLFNKVTLADAGFIKQYGDCLGDIAARDLICAQKFNGLTVLPPLLTDEMIAQYTSALLAGTITSGWTFGAGAALQIPFAMQMAYRFNGIGVTQNVLYENQKLIANQFNSAIGKIQDSLSSTASALGKLQDVVNHNAQALNTLVKQLSSNFGAISSVLNDILSRLDPPEAEVQIDRLITGRLQSLQTYVTQQLIRAAEIRASANLAATKMSECVLGQSKRVDFCGKGYHLMSFPQSAPHGVVFLHVTYVPAQEKNFTTAPAICHDGKAHFPREGVFVSNGTHWFVTQRNFYEPQIITTDNTFVSGNCDVVIGIVNNTVYDPLQPELDSFKEELDKYFKNHTSPDVDLGDISGINASVVNIQKEIDRLNEVAKNLNESLIDLQELGKYEQYIKWPWYIWLGFIAGLIAIVMVTIMLCCMTSCCSCLKGCCSCGSCCKFDEDDSEPVLKGVKLHYT"
@@ -258,6 +242,6 @@ def start_preprocessing_probert(data_file_path, protein_seq ='', host_organism='
         test_human_loader = DataLoader(test_dataset_human, batch_size=1, shuffle=False)
         print("Length of test_human_loader: ", len(test_human_loader.dataset))
     
-        return train_loader, val_loader, test_human_loader, ref_cds_list, CODON_DICT, max_len
+        return train_loader, val_loader, test_human_loader, CODON_DICT, max_len
 
-    return train_loader, val_loader, test_loader, ref_cds_list, CODON_DICT, max_len
+    return train_loader, val_loader, test_loader, CODON_DICT, max_len

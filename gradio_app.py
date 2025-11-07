@@ -1,7 +1,7 @@
 import gradio as gr
-from test_protbert import run_inference  # your existing function
+from test_protbert import run_inference  
 
-# Default custom AA sequence shown to the user
+# Default custom AA sequence
 DEFAULT_CUSTOM_AA = "MYRRCIASRWGTAAGKKPTLSGGGRETSPARTRSSFFVF"
 
 def infer_wrapper(mask, stability_type, tool_pkg, temperature, host_organism,
@@ -9,7 +9,6 @@ def infer_wrapper(mask, stability_type, tool_pkg, temperature, host_organism,
     use_custom = (protein_choice == "custom")
     seq_input = (custom_seq or "").strip() if use_custom else protein_choice
 
-    # If user somehow clears the box entirely, keep it empty and return gentle blanks
     if use_custom and not seq_input:
         return (
             "", None, gr.update(value=None, visible=False),
@@ -43,8 +42,7 @@ def infer_wrapper(mask, stability_type, tool_pkg, temperature, host_organism,
         )
 
 with gr.Blocks(title="Codon Optimization Tool") as demo:
-    gr.Markdown("# 🧬 ppLM-CO Tool")
-    # gr.Markdown("This tool uses a fine-tuned ProtBERT model to optimize codon sequences for expression in a host organism.")
+    gr.Markdown("# 🧬 ppLM-CO Codon Optimization Tool")
 
     with gr.Row():
         with gr.Column():

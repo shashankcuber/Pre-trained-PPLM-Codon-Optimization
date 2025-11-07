@@ -1,4 +1,5 @@
-CAI @git+https://github.com/Benjamin-Lee/CodonAdaptationIndex.git@b6e017a92c58829f6a5aec8c26a21262bc2a6610
+# CAI @git+https://github.com/Benjamin-Lee/CodonAdaptationIndex.git@b6e017a92c58829f6a5aec8c26a21262bc2a6610
+cai2
 gradio
 torch
 transformers
