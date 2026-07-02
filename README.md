@@ -1,8 +1,7 @@
 
-# ppLM-CO: Pre-trained Protein Language Model for Codon Optimization
+# ppLM-CO: Parameter Efficient Codon Optimization with Frozen Protein Language Model and Guaranteed Translation Fidelity (Official Repository)
 
-### Offical repository for the paper: [ppLM-CO: Pre-trained protein language model for codon optimization](https://www.biorxiv.org/content/10.1101/2024.12.12.628267v1). 
-
+## Published in the *17th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics (BCB ’26)* 
 <!-- ppLM-CO in it's current version can test different pre-trained models for predicitin optimized open reading frame (CDS) sequences for input protein sequences for host organisms: Human, E.coli and Chinese-Hamster Ovary cells. -->
 <!-- **Update:** Custom Protein Sequence can now be used within the gradio app. -->
 ![](./assets/ppLM-CO_arch.png)
