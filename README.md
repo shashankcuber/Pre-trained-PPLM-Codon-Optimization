@@ -66,12 +66,11 @@ pip3 install -r requirements.txt
 
 ## Citation
 ```
-@article{pathak2024pre,
-  title={Pre-trained protein language model for codon optimization},
+@inproceedings{pathak2026pplm,
+  title={ppLM-CO: Parameter-Efficient Codon Optimization with Frozen Pre-trained Protein Language Model and Guaranteed Translation Fidelity},
   author={Pathak, Shashank and Lin, Guohui},
-  journal={bioRxiv},
-  pages={2024--12},
-  year={2024},
-  publisher={Cold Spring Harbor Laboratory}
+  booktitle={Proceedings of the 17th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics},
+  pages={1--6},
+  year={2026}
 }
 ```
